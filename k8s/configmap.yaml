@@ -13,3 +13,4 @@ data:
   DB_PASSWORD: Pg1234
   DB_NAME: fakeshop
   FLASK_APP: index.py
+  TESTE: "123"
