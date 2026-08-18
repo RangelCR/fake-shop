@@ -1,0 +1,34 @@
+# postgre-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgre
+spec:
+  selector:
+    matchLabels:
+      app: postgre
+  template:
+    metadata:
+      labels:
+        app: postgre
+    spec:
+      containers:
+      - name: postgre
+        image: postgres:13.16
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - configMapRef:
+            name: fakeshop-config
+---
+# postgre-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgre
+spec:
+  selector:
+    app: postgre
+  ports:
+  - port: 5432
+    targetPort: 5432

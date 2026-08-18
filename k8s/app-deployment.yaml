@@ -1,0 +1,34 @@
+# fakeshop-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fakeshop
+spec:
+  selector:
+    matchLabels:
+      app: fakeshop
+  template:
+    metadata:
+      labels:
+        app: fakeshop
+    spec:
+      containers:
+      - name: fakeshop
+        image: rangelcr/fake-shop:v1
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: fakeshop-config
+---
+# fakeshop-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: fakeshop
+spec:
+  selector:
+    app: fakeshop
+  ports:
+  - port: 80
+    targetPort: 5000

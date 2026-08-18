@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fakeshop-config
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+data:
+  POSTGRES_DB: fakeshop
+  POSTGRES_USER: fakeshop
+  POSTGRES_PASSWORD: Pg1234
+  DB_HOST: postgre
+  DB_USER: fakeshop
+  DB_PASSWORD: Pg1234
+  DB_NAME: fakeshop
+  FLASK_APP: index.py

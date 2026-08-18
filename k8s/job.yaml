@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration-check
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: migration-check
+          image: busybox:1.36
+          command: ["sh", "-c", "echo 'Simulando checagem/migração de banco...' && sleep 10 && echo 'Migração concluída com sucesso'"]
+      restartPolicy: Never
+  backoffLimit: 0
